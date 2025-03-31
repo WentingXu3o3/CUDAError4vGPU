@@ -239,4 +239,18 @@ GPU 00000000:00:10.0
             Used GPU Memory               : 23 MiB
 
   ```
+* follow the instruction for license configuration and get
+```
+carlab@carlab:~$ sudo cat /etc/nvidia/ClientConfigToken/gridd.conf
+# /etc/nvidia/gridd.conf.template - Configuration file for NVIDIA Grid Daemon
+…
+# Description: Set Feature to be enabled
+# Data type: integer
+# Possible values:
+# 0 => for unlicensed state
+# 1 => for NVIDIA vGPU
+# 2 => for NVIDIA RTX Virtual Workstation
+# 4 => for NVIDIA Virtual Compute Server
+FeatureType=2
+```
 ![Screenshot 2025-03-31 at 17 01 02](https://github.com/user-attachments/assets/becb48a7-8d50-4c16-b4c0-0a12a56ea99c)
