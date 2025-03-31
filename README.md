@@ -490,4 +490,83 @@ Mar 31 06:53:50 carlab systemd[1]: nvidia-gridd.service: Failed with result 'exi
 lines 1-17/17 (END)
 
 ```
+* Suggestion from ChatGPT
+
+Thanks — this confirms the error persists. The root cause is:
+
+> **`Failed to decode signature from token received`**  
+> **`Failed to read configurations from client configuration token`**
+
+This means the **license client token is invalid or missing**.
+
+---
+
+### ✅ Step-by-Step Fix
+
+Here’s how to resolve this issue:
+
+---
+
+#### 📁 1. **Check if the token file exists**
+
+Run:
+```bash
+ls -l /etc/nvidia/ClientConfigToken/client_configuration_token.tok
+```
+
+If it doesn't exist or is `0 bytes`, you’ve found the issue.
+
+---
+
+#### 🌐 2. **Download a valid token**
+
+You'll need to log in to NVIDIA’s **Cloud Licensing Portal**:
+
+- **URL:** [https://nvid.nvidia.com/dashboard](https://nvid.nvidia.com/dashboard)
+- **Account:** Use your organization's NVIDIA licensing account
+- Navigate to:  
+  **License > Client Configuration Tokens**
+- Download the `.tok` file
+
+---
+
+#### 📥 3. **Place the token on your system**
+
+```bash
+sudo mkdir -p /etc/nvidia/ClientConfigToken
+sudo cp ~/Downloads/client_configuration_token.tok /etc/nvidia/ClientConfigToken/
+sudo chmod 644 /etc/nvidia/ClientConfigToken/client_configuration_token.tok
+```
+
+Make sure it's the exact name and correct path.
+
+---
+
+#### 🔁 4. **Restart the service**
+
+```bash
+sudo systemctl restart nvidia-gridd
+```
+
+Then confirm:
+```bash
+sudo systemctl status nvidia-gridd
+```
+
+You should see `Active: active (running)` now.
+
+---
+
+### ❓ Don’t have access to the NVIDIA portal?
+
+If you're not sure who manages your NVIDIA license or can't access the dashboard, you’ll need to:
+
+- Check with your IT or infrastructure team.
+- Or I can help you configure temporary unrestricted mode if you’re just testing (you’d get a 20-minute grace period with limited functionality).
+
+---
+
+Let me know if you want help checking the current config on your machine or getting a token bypassed temporarily.
+
+  
 ![Screenshot 2025-03-31 at 17 01 02](https://github.com/user-attachments/assets/becb48a7-8d50-4c16-b4c0-0a12a56ea99c)
