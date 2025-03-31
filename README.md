@@ -466,4 +466,28 @@ GPU 00000000:00:10.0
             Name                          : /usr/lib/xorg/Xorg
             Used GPU Memory               : 23 MiB
 ```
+But
+```
+carlab@carlab:~$ sudo systemctl status nvidia-gridd
+[sudo] password for carlab: 
+● nvidia-gridd.service - NVIDIA Grid Daemon
+     Loaded: loaded (/lib/systemd/system/nvidia-gridd.service; enabled; vendor preset: enabled)
+     Active: failed (Result: exit-code) since Mon 2025-03-31 06:53:50 UTC; 7min ago
+    Process: 1030 ExecStart=/usr/bin/nvidia-gridd (code=exited, status=0/SUCCESS)
+    Process: 1113 ExecStopPost=/bin/rm -rf /var/run/nvidia-gridd (code=exited, status=0/SUCCESS)
+   Main PID: 1039 (code=exited, status=1/FAILURE)
+
+Mar 31 06:53:49 carlab systemd[1]: Started NVIDIA Grid Daemon.
+Mar 31 06:53:50 carlab nvidia-gridd[1039]: vGPU Software package (0)
+Mar 31 06:53:50 carlab nvidia-gridd[1039]: Ignore service provider and node-locked licensing
+Mar 31 06:53:50 carlab nvidia-gridd[1039]: NLS initialized
+Mar 31 06:53:50 carlab nvidia-gridd[1039]: Failed to decode signature from token received
+Mar 31 06:53:50 carlab nvidia-gridd[1039]: Failed to read configurations from client configuration token (Error: >
+Mar 31 06:53:50 carlab nvidia-gridd[1039]: Failed to setup cloud License Manager: 3
+Mar 31 06:53:50 carlab nvidia-gridd[1039]: Shutdown (1039)
+Mar 31 06:53:50 carlab systemd[1]: nvidia-gridd.service: Main process exited, code=exited, status=1/FAILURE
+Mar 31 06:53:50 carlab systemd[1]: nvidia-gridd.service: Failed with result 'exit-code'.
+lines 1-17/17 (END)
+
+```
 ![Screenshot 2025-03-31 at 17 01 02](https://github.com/user-attachments/assets/becb48a7-8d50-4c16-b4c0-0a12a56ea99c)
